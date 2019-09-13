@@ -1,0 +1,24 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+{{places}}
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWppaCIsImEiOiJjanVwb3p2M2kxczk2M3ptcDRlc2cwYTZpIn0.B8dDJ9aejgRYjjc1hh2w1g';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v10',
+        center: [13.44, 52.49],
+        zoom: 5
+    });
+
+    const popup = new mapboxgl.Popup().setHTML('<div>Hello world</div>')
+
+    const places = {{ places }};
+
+    places.forEach(coordinates => {
+        new mapboxgl.Marker().setLngLat(coordinates).setPopup(popup).addTo(map)
+    })
+
+</script>
